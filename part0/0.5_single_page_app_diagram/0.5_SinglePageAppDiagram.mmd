@@ -1,0 +1,27 @@
+sequenceDiagram
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+
+    activate server
+    server-->>browser: HTTP status code 200(OK)
+    server-->>browser: HTML Document
+    deactivate server
+
+    note over browser, server: When HTML received, the browser makes 3 more requests.
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+
+    activate server
+    server-->>browser: HTTP status code 200(OK)
+    server-->>browser: CSS Document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+
+    activate server
+    server-->>browser: HTTP status code 200(OK)
+    server-->>browser: JavaScript Document
+    deactivate server
+
+    note over browser, server: The JavaScript file fetches the data(the list of notes).
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json

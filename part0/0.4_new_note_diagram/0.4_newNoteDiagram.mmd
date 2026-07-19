@@ -1,0 +1,46 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+    activate server
+    server-->>browser: HTTP status code 302(Found)
+    deactivate server
+
+    note over browser, server: Browser automatically requests the URL in Location header.
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+
+    activate server
+    server-->>browser: HTTP status code 200(OK)
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+
+    activate server
+    server-->>browser: HTTP status code 200(OK)
+    server-->>browser: CSS document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+
+    note over browser, server: The code in the JavaScript file fetches the data(the list of notes)
+
+    activate server
+    server-->>browser: HTTP status code 200(OK)
+    server-->>browser: JavaScript document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+
+
+    activate server
+    server-->>browser: HTTP status code 200(OK)
+    server-->>browser: JSON document
+    deactivate server
+
+
+
+
